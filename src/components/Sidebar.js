@@ -1,21 +1,22 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
 
+
 const Sidebar = () => {
 
     const isMenuOpen = useSelector(store => store.app.isMenuOpen)
 
-    if(!isMenuOpen){
+     if(!isMenuOpen){
         return(
             <div className='w-1 p-2 col-span-2'>
             <ul>
-                <li className='ml-2 mb-2'><i className="fa-solid fa-house fa-xl" ></i></li>
+                <li className=' mb-2'><i className="fa-solid fa-house fa-xl" ></i></li>
               
-                <li className='mt-16 mb-2 ml-2'><i className="fa-solid fa-bolt fa-xl"></i></li>
+                <li className='mt-16 mb-2'><i className="fa-solid fa-bolt fa-xl"></i></li>
   
-                <li className='mt-16 mb-2 ml-2'><i className="fa-sharp fa-solid fa-heart fa-xl"></i></li>
+                <li className='mt-16 mb-2'><i className="fa-sharp fa-solid fa-heart fa-xl"></i></li>
           
-                <li className='mt-16 mb-2 ml-2'><i className="fa-solid fa-book fa-xl"></i></li>
+                <li className='mt-16 mb-2'><i className="fa-solid fa-book fa-xl"></i></li>
             
             </ul>
             </div>

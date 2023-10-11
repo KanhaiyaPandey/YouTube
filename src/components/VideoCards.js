@@ -5,14 +5,12 @@ const VideoCards = (items) => {
 
     const isMenuOpen = useSelector(store => store.app.isMenuOpen)
 
-console.log(items?.info);
-
 const {snippet, statistics} = items.info;
 const {channelTitle, title, thumbnails} = snippet;
 
 if(!isMenuOpen){
     return(
-        <div className='mt-4 p-2 m-2 w-80'>
+        <div className='mt-4 p-2 m-2 w-80  hover:shadow-lg'>
         <img className='rounded-lg' alt='thumbnail' src={thumbnails.high.url}/>
         <ul>
             <li className='font-bold'>{title}</li>
@@ -24,7 +22,7 @@ if(!isMenuOpen){
 }
 
   return (
-    <div className='mt-4 p-2 m-2 w-96'>
+    <div className='mt-4 p-2 m-2 w-96  hover:shadow-lg'>
         <img className='rounded-lg' alt='thumbnail' src={thumbnails.high.url}/>
         <ul>
             <li className='font-bold'>{title}</li>
@@ -35,4 +33,4 @@ if(!isMenuOpen){
   )
 }
 
-export default VideoCards
+export default VideoCards;

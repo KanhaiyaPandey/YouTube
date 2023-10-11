@@ -1,8 +1,38 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { toggleMenu } from '../utils/appSlice'
 import { useDispatch } from 'react-redux'
+import { Search_api } from '../utils/constant';
 
 const Head = () => {
+
+  const [search, setSearch] = useState("");
+
+  const [Suggestions, setSuggestions]=useState([]);
+
+  const [showSuggestions, setShowSuggestions] = useState(false);
+
+
+// make an api call in every key press.
+  // but if the diff between to api calls is <200ms then decline that api call.
+
+
+  useEffect(()=>{
+
+    const timer = setTimeout(() => getSearchSuggestions(), 250) ;
+
+    return () => {
+      clearTimeout(timer);
+    }
+   
+  },[search]);
+
+  const getSearchSuggestions = async ()=> {
+       console.log(search);
+        const data = await fetch(Search_api + search);
+        const json = await data.json();
+        // console.log(json[1]);
+        setSuggestions(json[1]);
+  }
 
      const dispatch = useDispatch()
 
@@ -28,10 +58,24 @@ const Head = () => {
             </a>
 
         </div>
-
+  <div className='col-span-10'>
      <div className='col-span-10'>
-            <input className='mt-4 w-1/2 ml-32 p-2 border border-gray-300 rounded-l-full focus:outline-none' type='text'/>
-                <button className='p-2 pl-4 pr-6 bg-gray-100 border border-gray-300 rounded-r-full hover:bg-red-600'><i className="fa-solid fa-magnifying-glass"></i></button>
+            <input className='mt-4 w-1/2 ml-32 p-2 border border-gray-300 rounded-l-full focus:outline-none'
+             type='text'
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+            onFocus={()=> setShowSuggestions(true)}
+            onBlur={()=> setShowSuggestions(false)}
+            />
+                <button className='p-2 pl-4 pr-6 bg-gray-100 border border-gray-400 rounded-r-full hover:bg-red-600'><i className="fa-solid fa-magnifying-glass"></i></button>
+        </div>
+
+       {showSuggestions && ( <div className='fixed w-[34rem] bg-white ml-[9rem] rounded-lg shadow-lg'>
+          <ul>
+            {Suggestions.map(s=> <li key={s} className='hover:bg-gray-300 p-2 cursor-pointer'><i className="fa-solid fa-magnifying-glass fa-xs"></i>&nbsp;&nbsp; {s}</li>)}
+          </ul>
+        </div>)}
+
         </div>
 
         <div className='col-span-1'>
