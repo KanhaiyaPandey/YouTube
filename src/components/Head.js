@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import { toggleMenu } from '../utils/appSlice'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { Search_api } from '../utils/constant';
+import { cacheResult } from '../utils/searchSlice';
 
 const Head = () => {
 
@@ -11,6 +12,11 @@ const Head = () => {
 
   const [showSuggestions, setShowSuggestions] = useState(false);
 
+  const searchCache = useSelector((store) => store.search);
+
+  const dispatch = useDispatch();
+ 
+
 
 // make an api call in every key press.
   // but if the diff between to api calls is <200ms then decline that api call.
@@ -18,7 +24,13 @@ const Head = () => {
 
   useEffect(()=>{
 
-    const timer = setTimeout(() => getSearchSuggestions(), 250) ;
+    const timer = setTimeout(() =>{
+        if(searchCache[search]){
+          setSuggestions(searchCache[search]);
+        } else{
+           getSearchSuggestions()
+     }
+   } , 250) ;
 
     return () => {
       clearTimeout(timer);
@@ -32,9 +44,15 @@ const Head = () => {
         const json = await data.json();
         // console.log(json[1]);
         setSuggestions(json[1]);
+
+        // dispatch cache
+
+        dispatch(cacheResult({
+          [search]: json[1],
+        })
+      )
   }
 
-     const dispatch = useDispatch()
 
     const toggleMenuHandler =  () => {
         dispatch(toggleMenu())
@@ -58,9 +76,10 @@ const Head = () => {
             </a>
 
         </div>
+
   <div className='col-span-10'>
      <div className='col-span-10'>
-            <input className='mt-4 w-1/2 ml-32 p-2 border border-gray-300 rounded-l-full focus:outline-none'
+            <input className='mt-4 w-1/2 ml-32 p-2 pl-4 border border-gray-300 rounded-l-full focus:outline-none'
              type='text'
             value={search}
             onChange={(e) => setSearch(e.target.value)}
