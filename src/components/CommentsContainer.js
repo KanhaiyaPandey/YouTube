@@ -5,94 +5,72 @@ const commentsData = [
         name: "kanhaiya pandey",
         text: "Lorem Ipsum is simply dummy text of the printing and typesetting industry..",
         reply: [ 
-            {
+
+                {
                 name: "kanhaiya pandey",
                 text: "Lorem Ipsum is simply dummy text of the printing and typesetting industry..",
-                reply:[
+                reply: [
 
                     {
                         name: "kanhaiya pandey",
                         text: "Lorem Ipsum is simply dummy text of the printing and typesetting industry..",
                         reply: [
                             {
+                                
+                                    name: "kanhaiya pandey",
+                                    text: "Lorem Ipsum is simply dummy text of the printing and typesetting industry..",
+                                    reply: [
+                                        {
+                                            name: "kanhaiya pandey",
+                                            text: "Lorem Ipsum is simply dummy text of the printing and typesetting industry..",
+                                            reply: [
+                                                {
+                                                    name: "kanhaiya pandey",
+                                                    text: "Lorem Ipsum is simply dummy text of the printing and typesetting industry..",
+                                                    reply: [],
+                                                },
+                                            ],
+                                        },
+                                    ],
+                                
+                            },
+                            {
                                 name: "kanhaiya pandey",
                                 text: "Lorem Ipsum is simply dummy text of the printing and typesetting industry..",
-                                reply:[
-                
+                                reply: [
                                     {
                                         name: "kanhaiya pandey",
                                         text: "Lorem Ipsum is simply dummy text of the printing and typesetting industry..",
                                         reply: [],
                                     },
-                
                                 ],
-                              },
+                            },
+                            {
+                                name: "kanhaiya pandey",
+                                text: "Lorem Ipsum is simply dummy text of the printing and typesetting industry..",
+                                reply: [],
+                            },
                         ],
                     },
-
                 ],
               },
             {
                 name: "kanhaiya pandey",
                 text: "Lorem Ipsum is simply dummy text of the printing and typesetting industry..",
+                reply: [],
             },
             {
                 name: "kanhaiya pandey",
                 text: "Lorem Ipsum is simply dummy text of the printing and typesetting industry..",
+                reply: []
             },
         ]
     },
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    {
-        name: "kanhaiya pandey",
-        text: "Lorem Ipsum is simply dummy text of the printing and typesetting industry..",
-    },
-
-    {
-        name: "kanhaiya pandey",
-        text: "Lorem Ipsum is simply dummy text of the printing and typesetting industry..",
-    },
-
-    {
-        name: "kanhaiya pandey",
-        text: "Lorem Ipsum is simply dummy text of the printing and typesetting industry..",
-    },
-
-    {
-        name: "kanhaiya pandey",
-        text: "Lorem Ipsum is simply dummy text of the printing and typesetting industry..",
-    },
 ]
 
 const Comment = ({data}) => {
-    const {name, text, reply} = data;
+    const {name, text} = data;
   return(
     <div className='flex bg-gray-200 px-2 py-2 mb-4'>
         <img className='w-[20px] h-[20px] mt-1' alt='user' src='https://cdn-icons-png.flaticon.com/512/666/666201.png' />
@@ -108,10 +86,10 @@ const Comment = ({data}) => {
 }
 
 const CommentList = ({ comments }) => {
-    return comments.map((comment,index) => (
+    return comments.map((comment, index) => (
         <div>
         <Comment key={index} data={comment}/>
-        <div className='ml-2 border border-l-black pl-5'>
+        <div className='ml-3 border border-l-black pl-5'>
             <CommentList comments = {comment.reply} />
         </div>
         </div>
