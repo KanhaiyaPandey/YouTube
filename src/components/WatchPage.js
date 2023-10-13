@@ -5,6 +5,7 @@ import {  Link, useSearchParams } from 'react-router-dom';
 import { Youtube_video_api } from '../utils/constant';
 import Suggestions from './Suggestions';
 import CommentsContainer from './CommentsContainer';
+import ChatMessage from './ChatMessage';
 
 const WatchPage = () => {
 
@@ -41,6 +42,10 @@ const WatchPage = () => {
        allowfullscreen>
         </iframe>
 
+        <div className=''>
+          <ChatMessage />
+        </div>
+
         <div className='w-[56rem] mt-[1rem] py-2 px-2 bg-gray-300'>
 
           <CommentsContainer/>
@@ -48,7 +53,7 @@ const WatchPage = () => {
         </div>
 
         </div>
-        <div className='col-span-4'>
+        <div className='col-span-4 h-[130rem] overflow-hidden'>
         {videos.map(videos => (
           <Link to={"/watch?v="+videos.id}><Suggestions key={videos.id} info = {videos}/></Link>))}
         </div>

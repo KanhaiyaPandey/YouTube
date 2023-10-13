@@ -1,4 +1,5 @@
 import React from 'react'
+import LiveChats from './LiveChats';
 
 
 const Suggestions = (items) => {
@@ -9,7 +10,6 @@ const Suggestions = (items) => {
 
   return (
         <div className=' flex  ml-4 mb-4 w-96 h-30  transform transition-transform hover:scale-105 hover:shadow-lg'>
-  
         <div className='w-5/6 '>
         <img className='mt-1 w-full rounded-lg' alt='thumbnail' src={thumbnails.high.url}/>
         </div>
